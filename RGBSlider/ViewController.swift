@@ -10,7 +10,7 @@ import UIKit
 final class ViewController: UIViewController {
     
     //MARK: - IBOutlets
-    @IBOutlet var redArea: UIView!
+    @IBOutlet var rgbArea: UIView!
     
     @IBOutlet var redNumber: UILabel!
     @IBOutlet var greenNumber: UILabel!
@@ -23,31 +23,47 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        redArea.layer.cornerRadius = CGFloat(20)
+        rgbArea.layer.cornerRadius = 15
         
-        redNumber.text = String(format: "%.2f", redSlider.value)
-        greenNumber.text = String(format: "%.2f", greenSlider.value)
-        blueNumber.text = String(format: "%.2f", blueSlider.value)
+        formatRedNumber()
+        formatGreenNumber()
+        formatBlueNumber()
     }
     
     //MARK: - IBActions
     @IBAction func redSliderAction() {
-        redNumber.text = String(format: "%.2f", redSlider.value)
-        redArea.backgroundColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
+        formatRedNumber()
+        activateRGBArea()
     }
     
     @IBAction func greenSliderAction() {
-        greenNumber.text = String(format: "%.2f", greenSlider.value)
-        redArea.backgroundColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
+        formatGreenNumber()
+        activateRGBArea()
     }
     
     @IBAction func blueSliderAction() {
-        blueNumber.text = String(format: "%.2f", blueSlider.value)
-        redArea.backgroundColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
+        formatBlueNumber()
+        activateRGBArea()
     }
     
     //MARK: - Private Methods
+    private func activateRGBArea() {
+        rgbArea.backgroundColor = UIColor(red: CGFloat(redSlider.value),
+                                          green: CGFloat(greenSlider.value),
+                                          blue: CGFloat(blueSlider.value),
+                                          alpha: 1)
+    }
     
-
+    private func formatRedNumber() {
+        redNumber.text = String(format: "%.2f", redSlider.value)
+    }
+    
+    private func formatGreenNumber() {
+        greenNumber.text = String(format: "%.2f", greenSlider.value)
+    }
+    
+    private func formatBlueNumber() {
+        blueNumber.text = String(format: "%.2f", blueSlider.value)
+    }
 }
 
